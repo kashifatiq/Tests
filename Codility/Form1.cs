@@ -35,12 +35,12 @@ namespace Codility
         private void btnBracketRotation_Click(object sender, EventArgs e)
         {
             Solution obj = new Solution();
-            
-            /*var result1 = obj.solution("()()");       //1
-            var result2 = obj.solution("(())()");     //1
-            var result3 = obj.solution("((())(()");   //0
-            var result4 = obj.solution(")))(((");     //0*/
 
+            obj.BiggestPair = 0;
+            var r = obj.solution(")()()(", 3);       //4 exp 6 (()())
+
+            obj.BiggestPair = 0;
+            var r5 = obj.solution(")))(((", 2);     //0 exp 4 )()()(
 
             obj.BiggestPair = 0;
             var r1 = obj.solution("()()",2);       //4
@@ -49,13 +49,12 @@ namespace Codility
             var r2 = obj.solution("(())()",2);     //6
 
             obj.BiggestPair = 0;
-            var r3 = obj.solution("((())(()",2);   //4
+            var r3 = obj.solution("((())(()",2);   //4 exp 8
 
             obj.BiggestPair = 0;
-            var r4 = obj.solution("((()))()",2);   //8
+            var r4 = obj.solution("((()))()",2);   //8 exp 8
 
-            obj.BiggestPair = 0;
-            var r5 = obj.solution(")))(((",2);     //0
+
 
             obj.BiggestPair = 0;
             var r6 = obj.solution("))(()(())))(())",2);     //8
