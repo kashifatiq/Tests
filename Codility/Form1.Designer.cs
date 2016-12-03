@@ -31,6 +31,8 @@
             this.btnTennisTournament = new System.Windows.Forms.Button();
             this.btnSockSupply = new System.Windows.Forms.Button();
             this.btnBracketRotation = new System.Windows.Forms.Button();
+            this.btnLights = new System.Windows.Forms.Button();
+            this.txtWinterLights = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnTennisTournament
@@ -63,17 +65,37 @@
             this.btnBracketRotation.UseVisualStyleBackColor = true;
             this.btnBracketRotation.Click += new System.EventHandler(this.btnBracketRotation_Click);
             // 
+            // btnLights
+            // 
+            this.btnLights.Location = new System.Drawing.Point(0, 53);
+            this.btnLights.Name = "btnLights";
+            this.btnLights.Size = new System.Drawing.Size(141, 47);
+            this.btnLights.TabIndex = 3;
+            this.btnLights.Text = "Winter Lights";
+            this.btnLights.UseVisualStyleBackColor = true;
+            this.btnLights.Click += new System.EventHandler(this.btnLights_Click);
+            // 
+            // txtWinterLights
+            // 
+            this.txtWinterLights.Location = new System.Drawing.Point(147, 80);
+            this.txtWinterLights.Name = "txtWinterLights";
+            this.txtWinterLights.Size = new System.Drawing.Size(402, 20);
+            this.txtWinterLights.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 419);
+            this.Controls.Add(this.txtWinterLights);
+            this.Controls.Add(this.btnLights);
             this.Controls.Add(this.btnBracketRotation);
             this.Controls.Add(this.btnSockSupply);
             this.Controls.Add(this.btnTennisTournament);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -82,6 +104,8 @@
         private System.Windows.Forms.Button btnTennisTournament;
         private System.Windows.Forms.Button btnSockSupply;
         private System.Windows.Forms.Button btnBracketRotation;
+        private System.Windows.Forms.Button btnLights;
+        private System.Windows.Forms.TextBox txtWinterLights;
     }
 }
 

@@ -60,5 +60,15 @@ namespace Codility
             var r6 = obj.solution("))(()(())))(())",2);     //8
 
         }
+
+        private void btnLights_Click(object sender, EventArgs e)
+        {
+            WinterLighits.Solution obj = new WinterLighits.Solution();
+            int x0 = obj.solution(txtWinterLights.Text.Trim());
+            int x1 = obj.solution("00");
+            int x2 = obj.solution("000"); //0,0,00,0,00,00,000
+            int x3 = obj.solution("123");   //1,2,12,3,13,23,123
+            int x4 = obj.solution("02002"); //0,2,02,0,00,20,020,0,00,20,020,00,000,200,0200,2,02,22,022,02,002,202,0202,02,002,202,0202,002,0002,2002,02002
+        }
     }
 }
