@@ -64,6 +64,8 @@ namespace Codility
         private void btnLights_Click(object sender, EventArgs e)
         {
             WinterLighits.Solution obj = new WinterLighits.Solution();
+            int x12 = obj.solution("Thue-Morse3434545565676787865656565454353534343crggg4545454545454543434344545454545454546565677676767676767676767565465656565656565");
+            int x11 = obj.solution("Thue-Morse");
             int x0 = obj.solution(txtWinterLights.Text.Trim());
             int x1 = obj.solution("00");
             int x2 = obj.solution("000"); //0,0,00,0,00,00,000
