@@ -7,20 +7,25 @@ using System.Linq;
 
 namespace Problems
 {
-            
+           
     public class WinterLighits
     {
-
+        //using System;
+        //using System.Collections.Generic;
+        //using System.Linq;
         public class Solution
         {
+            //List<string> lstexecTimes = new List<string>();
             
             public int solution(string S)
             {
                 try
                 {
+                    //lstexecTimes = new List<string>();
                     int segmentsCount = 0;
                     segmentsCount = GetCombinations(S);
                     segmentsCount = segmentsCount + S.Length;
+
                     return segmentsCount;
                 }
                 finally
@@ -31,35 +36,44 @@ namespace Problems
 
             private bool canFormPalindrome(string str)
             {
-                    int NO_OF_CHARS = 256;
-                    // Create a count array and initialize all values as 0
-                    int[] count = new int[NO_OF_CHARS];
+                //var watch = System.Diagnostics.Stopwatch.StartNew();
+                int NO_OF_CHARS = 256;
+                // Create a count array and initialize all values as 0
+                int[] count = new int[NO_OF_CHARS];
+                // For each character in input strings, increment count in the corresponding count array
+                for (int x = 0; x < str.Length; x++)
+                {
+                    
+                }
+                foreach (char t in str)
+                {
+                   count[t]++;
+                }
 
-                    // For each character in input strings, increment count in the corresponding count array
-                    foreach (char t in str)
+                // Count odd occurring characters
+                int odd = 0;
+                for (int i = 0; i < NO_OF_CHARS; i++)
+                {
+                    if ((count[i] & 1) != 0)
                     {
-                        count[t]++;
+                        odd++;
                     }
+                }
 
-                    // Count odd occurring characters
-                    int odd = 0;
-                    for (int i = 0; i < NO_OF_CHARS; i++)
-                    {
-                        if ((count[i] & 1) != 0)
-                        {
-                            odd++;
-                        }
-                    }
-
-                    // Return true if odd count is 0 or 1, otherwise false
-                    return (odd <= 1);
+                // Return true if odd count is 0 or 1, otherwise false
+                //watch.Stop();
+                //var elapsedMs = watch.ElapsedMilliseconds;
+                //lstexecTimes.Add("canform :" + elapsedMs.ToString());                
+                return (odd <= 1);
             }
 
             private int GetCombinations(string S)
             {
                 try
                 {
-                    List<string> lstCombinations = new List<string>();
+                    int palindromsCount = 0;
+                    //List<string> lstCombinations = new List<string>();
+                    //Dictionary<string, bool> dicAlreadyTested = new Dictionary<string, bool>();
                     int pairSize = 2; //starting from pairs of 2 ignoring single letters
                     int pairSegments = S.Length - 1;
                     while (pairSegments > 0)
@@ -68,27 +82,48 @@ namespace Problems
                         while (counter < pairSegments)
                         {
                             string pair = S.Substring(counter, pairSize);
+                            //if (dicAlreadyTested.ContainsKey(pair))
+                            //{
+                            //    bool isPalindrome = dicAlreadyTested[pair];
+                            //    if (isPalindrome == true)
+                            //        palindromsCount = palindromsCount + 1;
+                            //}
+                            //else
+                            //{
                             if (IsPalindrom(pair))
                             {
-                                lstCombinations.Add(pair);
+                                palindromsCount = palindromsCount + 1;
+                                //dicAlreadyTested.Add(pair, true);
+                                //lstCombinations.Add(pair);
                             }
-                            else if(pair.Length > 2)
+                            else if (pair.Length > 2)
                             {
                                 if (canFormPalindrome(pair))
-                                    lstCombinations.Add(pair);
+                                {
+                                    //dicAlreadyTested.Add(pair, true);
+                                    palindromsCount = palindromsCount + 1;
+                                    //lstCombinations.Add(pair);
+                                }
+                                /*  else // can not create palindrome
+                                  {
+                                      dicAlreadyTested.Add(pair, false);
+                                  }
+                              }*/
                             }
                             counter = counter + 1;
                         }
                         pairSegments = pairSegments - 1;
                         pairSize = pairSize + 1;
                     }
-                    return lstCombinations.Count();
+                    //return lstCombinations.Count();
+                    return palindromsCount;
                 }
                 finally
                 {
                     GC.Collect();
                 }
             }
+
             private static bool IsPalindrom(string stringToCheck)
             {
                 var isEqual = stringToCheck.SequenceEqual(stringToCheck.Reverse());
