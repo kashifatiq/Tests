@@ -33,6 +33,7 @@
             this.btnBracketRotation = new System.Windows.Forms.Button();
             this.btnLights = new System.Windows.Forms.Button();
             this.txtWinterLights = new System.Windows.Forms.TextBox();
+            this.btnChromium = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTennisTournament
@@ -82,11 +83,22 @@
             this.txtWinterLights.Size = new System.Drawing.Size(402, 20);
             this.txtWinterLights.TabIndex = 4;
             // 
+            // btnChromium
+            // 
+            this.btnChromium.Location = new System.Drawing.Point(0, 106);
+            this.btnChromium.Name = "btnChromium";
+            this.btnChromium.Size = new System.Drawing.Size(141, 47);
+            this.btnChromium.TabIndex = 5;
+            this.btnChromium.Text = "Chromium";
+            this.btnChromium.UseVisualStyleBackColor = true;
+            this.btnChromium.Click += new System.EventHandler(this.btnChromium_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 419);
+            this.Controls.Add(this.btnChromium);
             this.Controls.Add(this.txtWinterLights);
             this.Controls.Add(this.btnLights);
             this.Controls.Add(this.btnBracketRotation);
@@ -106,6 +118,7 @@
         private System.Windows.Forms.Button btnBracketRotation;
         private System.Windows.Forms.Button btnLights;
         private System.Windows.Forms.TextBox txtWinterLights;
+        private System.Windows.Forms.Button btnChromium;
     }
 }
 

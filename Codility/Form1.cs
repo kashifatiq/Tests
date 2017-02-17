@@ -72,5 +72,13 @@ namespace Codility
             int x3 = obj.solution("123");   //1,2,12,3,13,23,123
             int x4 = obj.solution("02002"); //0,2,02,0,00,20,020,0,00,20,020,00,000,200,0200,2,02,22,022,02,002,202,0202,02,002,202,0202,002,0002,2002,02002
         }
+
+        private void btnChromium_Click(object sender, EventArgs e)
+        {
+            int[] arr1 = new int[] { 13, 2, 5 };
+            Chromium.Solution obj = new Chromium.Solution();
+            int result = 0;
+            result = obj.solution(arr1);
+        }
     }
 }
