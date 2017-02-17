@@ -30,7 +30,7 @@ namespace Problems
                 }
                 finally
                 {
-                    GC.Collect();
+                    //GC.Collect();
                 }
             }
 
@@ -67,13 +67,11 @@ namespace Problems
                 return (odd <= 1);
             }
 
-            private int GetCombinations(string S)
+            private int GetCombinations2(string S)
             {
                 try
                 {
                     int palindromsCount = 0;
-                    //List<string> lstCombinations = new List<string>();
-                    //Dictionary<string, bool> dicAlreadyTested = new Dictionary<string, bool>();
                     int pairSize = 2; //starting from pairs of 2 ignoring single letters
                     int pairSegments = S.Length - 1;
                     while (pairSegments > 0)
@@ -82,45 +80,65 @@ namespace Problems
                         while (counter < pairSegments)
                         {
                             string pair = S.Substring(counter, pairSize);
-                            //if (dicAlreadyTested.ContainsKey(pair))
-                            //{
-                            //    bool isPalindrome = dicAlreadyTested[pair];
-                            //    if (isPalindrome == true)
-                            //        palindromsCount = palindromsCount + 1;
-                            //}
-                            //else
-                            //{
                             if (IsPalindrom(pair))
                             {
                                 palindromsCount = palindromsCount + 1;
-                                //dicAlreadyTested.Add(pair, true);
-                                //lstCombinations.Add(pair);
                             }
                             else if (pair.Length > 2)
                             {
                                 if (canFormPalindrome(pair))
                                 {
-                                    //dicAlreadyTested.Add(pair, true);
                                     palindromsCount = palindromsCount + 1;
-                                    //lstCombinations.Add(pair);
                                 }
-                                /*  else // can not create palindrome
-                                  {
-                                      dicAlreadyTested.Add(pair, false);
-                                  }
-                              }*/
                             }
                             counter = counter + 1;
                         }
                         pairSegments = pairSegments - 1;
                         pairSize = pairSize + 1;
                     }
-                    //return lstCombinations.Count();
                     return palindromsCount;
                 }
                 finally
                 {
-                    GC.Collect();
+                    //GC.Collect();
+                }
+            }
+
+
+            private int GetCombinations(string S)
+            {
+                try
+                {
+                    int palindromsCount = 0;
+                    int pairSize = 2; //starting from pairs of 2 ignoring single letters
+                    int pairSegments = S.Length - 1;
+                    while (pairSegments > 0)
+                    {
+                        int counter = 0;
+                        while (counter < pairSegments)
+                        {
+                            string pair = S.Substring(counter, pairSize);
+                            if (IsPalindrom(pair))
+                            {
+                                palindromsCount = palindromsCount + 1;
+                            }
+                            else if (pair.Length > 2)
+                            {
+                                if (canFormPalindrome(pair))
+                                {
+                                    palindromsCount = palindromsCount + 1;
+                                }
+                            }
+                            counter = counter + 1;
+                        }
+                        pairSegments = pairSegments - 1;
+                        pairSize = pairSize + 1;
+                    }
+                    return palindromsCount;
+                }
+                finally
+                {
+                    //GC.Collect();
                 }
             }
 
