@@ -31,11 +31,11 @@ namespace Problems
                     CurrentNumber = H[pointer];
                     leftSide = SubArray(H, 0, pointer).Where(r => r >= H[pointer]).ToList();
                     leftSide = leftSide.Where(r => r >= H[pointer]).ToArray().ToList();
-                    leftSide.Sort();
+                    //leftSide.Sort();
 
                     rightSide = SubArray(H, pointer + 1, arrLenght - (pointer + 1));
                     rightSide = rightSide.Where(r => r >= H[pointer]).ToList();
-                    rightSide.Sort();
+                    //rightSide.Sort();
 
                     combinationCounts = combinationCounts + 1;
                     if (leftSide.Count() == 0 && rightSide.Count() == 0)      // 0/0
@@ -59,7 +59,7 @@ namespace Problems
                     {
                         combinationCounts = combinationCounts + (rightSide.Count() + leftSide.Count()); // single combination with each number 
                         // find length of max side
-                       /* int maxCombinations = 0;
+                        int maxCombinations = 0;
                         if (leftSide.Count() > rightSide.Count())
                             maxCombinations = leftSide.Count();
                         else if (rightSide.Count() > leftSide.Count())
@@ -85,8 +85,11 @@ namespace Problems
                                     strCombinations.Append(rightSide[y].ToString() + "," + leftSide[y].ToString() + ":");
                                 }
                             }
-                        }*/
-                        //GetCombination(new List<int> { 1, 2, 3, 4 }, 1);
+                        }
+
+                        List<int> Combined = leftSide;
+                        Combined.AddRange(rightSide);
+                        GetCombination(Combined, 1);
                         //IEnumerable<IEnumerable<int>> dd = GetKCombs(new int[] { 1, 2, 3 }, 2);
                     }
                 }
