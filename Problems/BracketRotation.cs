@@ -18,7 +18,7 @@ namespace Problems
         {
             QuestionResults results = new QuestionResults();
             int consecutivePairsCounter = 0;
-            int longestPair = 0;
+            //int longestPair = 0;
             var stack = new Stack<char>();
             foreach (char symbol in S)
             {
