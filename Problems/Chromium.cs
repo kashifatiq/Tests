@@ -21,20 +21,18 @@ namespace Problems
             public int solution(int[] H)
             {
                 long combinationCounts = 0;
-                long arrLenght =(long)H.Length;
+                long arrLenght = (long)H.Length;
                 //int CurrentNumber = 0;
                 List<long> leftSide;
                 List<long> rightSide;
                 for (long pointer = 0; pointer < arrLenght; pointer++)
                 {
                     //CurrentNumber = H[pointer];
-                    leftSide = SubArray(H, 0,(int)pointer).Where(r => r >= H[pointer]).ToList();
-                    leftSide = leftSide.Where(r => r >= H[pointer]).ToArray().ToList();
-                    leftSide.Sort();
+                    leftSide = SubArray(H, 0, (int)pointer).Where(r => r >= H[pointer]).ToList();
+                    leftSide = leftSide.Where(r => r >= H[pointer]).ToArray().ToList(); // removing numbers which are smaller than current number
 
                     rightSide = SubArray(H, pointer + 1, arrLenght - (pointer + 1));
-                    rightSide = rightSide.Where(r => r >= H[pointer]).ToList();
-                    rightSide.Sort();
+                    rightSide = rightSide.Where(r => r >= H[pointer]).ToList();         // removing numbers which are smaller than current number
 
                     combinationCounts = combinationCounts + 1;
                     if (leftSide.Count() == 0 && rightSide.Count() == 0)      // 0/0
@@ -55,6 +53,8 @@ namespace Problems
                     }
                     else // n/n
                     {
+                        leftSide.Sort();
+                        rightSide.Sort();
                         combinationCounts = combinationCounts + GetCombination(leftSide, rightSide);
                     }
                 }
