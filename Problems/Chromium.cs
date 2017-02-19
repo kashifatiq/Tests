@@ -31,11 +31,11 @@ namespace Problems
                     CurrentNumber = H[pointer];
                     leftSide = SubArray(H, 0, pointer).Where(r => r >= H[pointer]).ToList();
                     leftSide = leftSide.Where(r => r >= H[pointer]).ToArray().ToList();
-                    //leftSide.Sort();
+                    leftSide.Sort();
 
                     rightSide = SubArray(H, pointer + 1, arrLenght - (pointer + 1));
                     rightSide = rightSide.Where(r => r >= H[pointer]).ToList();
-                    //rightSide.Sort();
+                    rightSide.Sort();
 
                     combinationCounts = combinationCounts + 1;
                     if (leftSide.Count() == 0 && rightSide.Count() == 0)      // 0/0
@@ -87,7 +87,7 @@ namespace Problems
                             }
                         }
 
-                        combinationCounts = combinationCounts + GetCombination(leftSide, rightSide, maxCombinations);
+                        combinationCounts = combinationCounts + GetCombination(leftSide, rightSide);
                         //IEnumerable<IEnumerable<int>> dd = GetKCombs(new int[] { 1, 2, 3 }, 2);
                     }
                 }
@@ -100,8 +100,8 @@ namespace Problems
                 Array.Copy(data, index, result, 0, length);
                 return result.ToList();
             }
-            
-            static int GetCombination(List<int> leftSide, List<int> rightSide,int maxLenght)
+
+            public static int GetCombination(List<int> leftSide, List<int> rightSide)
             {
                 #region // EXTRA
                 string dd = string.Empty;
@@ -112,7 +112,7 @@ namespace Problems
                 List<int> Combined = new List<int>();
                 Combined.AddRange(leftSide);
                 Combined.AddRange(rightSide);
-                
+                Combined.Sort();
                 List<int> combinations = new List<int>();
                 double count = Math.Pow(2, Combined.Count);
                 for (int i = 1; i <= count - 1; i++)
@@ -123,8 +123,26 @@ namespace Problems
                         if (str[j] == '1')
                         {
                             combinations.Add(Combined[j]);
+                            if (combinations.Count() >= 2)
+                            {
+                                // if there are consecutive elements from any 1 list than ignore this combination
+                                if (leftSide.Contains(combinations[combinations.Count() -1]) == true && leftSide.Contains(combinations[combinations.Count() - 2]) == true)
+                                {
+                                    combinations.Clear();
+                                    break;
+                                }
+                                if (rightSide.Contains(combinations[combinations.Count() - 1]) == true && rightSide.Contains(combinations[combinations.Count() - 2]) == true)
+                                {
+                                    combinations.Clear();
+                                    break;
+                                }
+                            }
+                            bool leftSideElementsCount = leftSide.Intersect(combinations).Count() == combinations.Count();
+
                         }
                     }
+                    if (combinations.Count() == 0)
+                        continue;
                     // if all members are from 1 side than ignore
                     // if length is greater than length of dominant side that ignore
                     // ignore if ratio of elements from both sides is greater than 2
@@ -134,13 +152,14 @@ namespace Problems
                     int rightRatio = 0;
                     if (combinations.Count() > 1)
                     {
+
                         int leftSideElementsCount = leftSide.Intersect(combinations).Count();
                         int rightSideElementsCount = rightSide.Intersect(combinations).Count();
                         LeftRatio = leftSideElementsCount - rightSideElementsCount;
                         rightRatio = rightSideElementsCount - leftSideElementsCount;
 
-                        isAllfromLeftSide = leftSide.Intersect(combinations).Count() == combinations.Count(); //checks that all element from 1 side
-                        isAllfromRightSide = rightSide.Intersect(combinations).Count() == combinations.Count(); //checks that all element from 1 side
+                        isAllfromLeftSide = leftSideElementsCount == combinations.Count(); //checks that all element from 1 side
+                        isAllfromRightSide = rightSideElementsCount == combinations.Count(); //checks that all element from 1 side
                     }
                     if ((isAllfromLeftSide == false && isAllfromRightSide == false) && (LeftRatio < 2 && rightRatio < 2))
                     {
@@ -153,8 +172,8 @@ namespace Problems
                     }
                     combinations.Clear();
                 }
-                
-                return TotalCombinations ;
+
+                return TotalCombinations;
             }
         }
     }
