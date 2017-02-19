@@ -20,15 +20,15 @@ namespace Problems
         {
             public int solution(int[] H)
             {
-                int combinationCounts = 0;
-                int arrLenght = H.Length;
+                long combinationCounts = 0;
+                long arrLenght =(long)H.Length;
                 //int CurrentNumber = 0;
-                List<int> leftSide;
-                List<int> rightSide;
-                for (int pointer = 0; pointer < arrLenght; pointer++)
+                List<long> leftSide;
+                List<long> rightSide;
+                for (long pointer = 0; pointer < arrLenght; pointer++)
                 {
                     //CurrentNumber = H[pointer];
-                    leftSide = SubArray(H, 0, pointer).Where(r => r >= H[pointer]).ToList();
+                    leftSide = SubArray(H, 0,(int)pointer).Where(r => r >= H[pointer]).ToList();
                     leftSide = leftSide.Where(r => r >= H[pointer]).ToArray().ToList();
                     leftSide.Sort();
 
@@ -55,61 +55,29 @@ namespace Problems
                     }
                     else // n/n
                     {
-                        // find length of max side
-                        int maxCombinations = 0;
-                        if (leftSide.Count() > rightSide.Count())
-                            maxCombinations = leftSide.Count();
-                        else if (rightSide.Count() > leftSide.Count())
-                            maxCombinations = rightSide.Count();
-                        else
-                            maxCombinations = leftSide.Count(); // both sides are equal in length
-
-                        int maxDigitsCount = (rightSide.Count() + leftSide.Count());
-                        
-                        StringBuilder strCombinations = new StringBuilder();
-                        for (int x = 2; x <= maxDigitsCount; x++)
-                        {
-                            for (int y = 0; y < maxCombinations; y++)
-                            {
-                                if (leftSide.Count() > y && rightSide.Count() > y && y < x && leftSide[y] < rightSide[y])
-                                {
-                                    strCombinations.Append(leftSide[y].ToString() + "," + rightSide[y].ToString() + ":");
-                                }
-                                if (leftSide.Count() > y && rightSide.Count() > y && y < x && leftSide[y] > rightSide[y])
-                                {
-                                    strCombinations.Append(rightSide[y].ToString() + "," + leftSide[y].ToString() + ":");
-                                }
-                            }
-                        }
-
                         combinationCounts = combinationCounts + GetCombination(leftSide, rightSide);
                     }
                 }
-                return combinationCounts;
+                return (int)combinationCounts;
             }
 
-            public List<int> SubArray(int[] data, int index, int length)
+            public List<long> SubArray(int[] data, long index, long length)
             {
-                int[] result = new int[length];
+                long[] result = new long[length];
                 Array.Copy(data, index, result, 0, length);
                 return result.ToList();
             }
 
-            public static int GetCombination(List<int> leftSide, List<int> rightSide)
+            public static long GetCombination(List<long> leftSide, List<long> rightSide)
             {
-                #region // EXTRA
-                //string dd = string.Empty;
-                //List<string> lstCombinations = new List<string>();
-                #endregion
-
                 int TotalCombinations = 0;
-                List<int> Combined = new List<int>();
+                List<long> Combined = new List<long>();
                 Combined.AddRange(leftSide);
                 Combined.AddRange(rightSide);
                 Combined.Sort();
-                List<int> combinations = new List<int>();
+                List<long> combinations = new List<long>();
                 double count = Math.Pow(2, Combined.Count);
-                for (int i = 1; i <= count - 1; i++)
+                for (long i = 1; i <= count - 1; i++)
                 {
                     string str = Convert.ToString(i, 2).PadLeft(Combined.Count, '0');
                     for (int j = 0; j < str.Length; j++)
@@ -135,34 +103,6 @@ namespace Problems
                     }
                     if (combinations.Count() == 0)
                         continue;
-                    /*
-                    // if all members are from 1 side than ignore
-                    // if length is greater than length of dominant side that ignore
-                    // ignore if ratio of elements from both sides is greater than 2
-                    bool isAllfromLeftSide = false;
-                    bool isAllfromRightSide = false;
-                    int LeftRatio = 0;
-                    int rightRatio = 0;
-                    if (combinations.Count() > 1)
-                    {
-
-                        int leftSideElementsCount = leftSide.Intersect(combinations).Count();
-                        int rightSideElementsCount = rightSide.Intersect(combinations).Count();
-                        LeftRatio = leftSideElementsCount - rightSideElementsCount;
-                        rightRatio = rightSideElementsCount - leftSideElementsCount;
-
-                        isAllfromLeftSide = leftSideElementsCount == combinations.Count(); //checks that all element from 1 side
-                        isAllfromRightSide = rightSideElementsCount == combinations.Count(); //checks that all element from 1 side
-                    }
-                    if ((isAllfromLeftSide == false && isAllfromRightSide == false) && (LeftRatio < 2 && rightRatio < 2))
-                    {
-                        #region EXTRA
-                        //lstCombinations.Add(string.Join(",", combinations.ToArray()));
-                        //dd = dd + string.Join(",", combinations.ToArray());
-                        //dd = dd + ":";
-                        #endregion
-                        TotalCombinations = TotalCombinations + 1;
-                    }*/
                     TotalCombinations = TotalCombinations + 1;
                     combinations.Clear();
                 }
