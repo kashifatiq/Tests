@@ -77,11 +77,19 @@ namespace Codility
         {
             int[] arr1 = new int[] { 13, 2, 5 };
             Chromium.Solution obj = new Chromium.Solution();
-            int result = 0;
-            result = obj.solution(arr1); // 7
+            int result = obj.solution(arr1); // 7
 
             int[] arr2 = new int[] { 4, 6, 2, 1, 5 };
-            result = obj.solution(arr2); // 23
+            int result1 = obj.solution(arr2); // 23
+
+            int[] arr3 = new int[] {13,2,5,7 };
+            int result2 = obj.solution(arr3); // 13
+
+            int[] arr4 = new int[] { 3,4,65,8,2 };
+            int result3 = obj.solution(arr4); // 15
+
+            int[] arr5 = new int[] {5,4,8,9,1,6,2};
+            int result4 = obj.solution(arr5); // 49
         }
     }
 }

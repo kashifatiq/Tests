@@ -57,7 +57,7 @@ namespace Problems
                     }
                     else // n/n
                     {
-                        combinationCounts = combinationCounts + (rightSide.Count() + leftSide.Count()); // single combination with each number 
+                        //combinationCounts = combinationCounts + (rightSide.Count() + leftSide.Count()); // single combination with each number 
                         // find length of max side
                         int maxCombinations = 0;
                         if (leftSide.Count() > rightSide.Count())
@@ -66,7 +66,7 @@ namespace Problems
                             maxCombinations = rightSide.Count();
                         else
                             maxCombinations = leftSide.Count(); // both sides are equal in length
-                        maxCombinations = (rightSide.Count() + leftSide.Count()) * maxCombinations;
+                        //maxCombinations = (rightSide.Count() + leftSide.Count()) * maxCombinations;
 
                         int maxDigitsCount = (rightSide.Count() + leftSide.Count());
                         
@@ -87,9 +87,7 @@ namespace Problems
                             }
                         }
 
-                        List<int> Combined = leftSide;
-                        Combined.AddRange(rightSide);
-                        GetCombination(Combined, 1);
+                        combinationCounts = combinationCounts + GetCombination(leftSide, rightSide, maxCombinations);
                         //IEnumerable<IEnumerable<int>> dd = GetKCombs(new int[] { 1, 2, 3 }, 2);
                     }
                 }
@@ -102,33 +100,61 @@ namespace Problems
                 Array.Copy(data, index, result, 0, length);
                 return result.ToList();
             }
-            /*
-            static IEnumerable<IEnumerable<T>> GetKCombs<T>(IEnumerable<T> list, int length) where T : IComparable
+            
+            static int GetCombination(List<int> leftSide, List<int> rightSide,int maxLenght)
             {
-                if (length == 1) return list.Select(t => new T[] { t });
-                return GetKCombs(list, length - 1)
-                    .SelectMany(t => list.Where(o => o.CompareTo(t.Last()) > 0),
-                        (t1, t2) => t1.Concat(new T[] { t2 }));
-            }
-            */
-            static void GetCombination(List<int> list ,int Base)
-            {
-                string combinations = "";
-                double count = Math.Pow(2, list.Count);
+                #region // EXTRA
+                string dd = string.Empty;
+                List<string> lstCombinations = new List<string>();
+                #endregion
+
+                int TotalCombinations = 0;
+                List<int> Combined = new List<int>();
+                Combined.AddRange(leftSide);
+                Combined.AddRange(rightSide);
+                
+                List<int> combinations = new List<int>();
+                double count = Math.Pow(2, Combined.Count);
                 for (int i = 1; i <= count - 1; i++)
                 {
-                    string str = Convert.ToString(i, 2).PadLeft(list.Count, '0');
+                    string str = Convert.ToString(i, 2).PadLeft(Combined.Count, '0');
                     for (int j = 0; j < str.Length; j++)
                     {
                         if (str[j] == '1')
                         {
-                            combinations = combinations + list[j];
-                            //Console.Write(list[j]);
+                            combinations.Add(Combined[j]);
                         }
                     }
-                    combinations = combinations + ",";
-                    //Console.WriteLine();
+                    // if all members are from 1 side than ignore
+                    // if length is greater than length of dominant side that ignore
+                    // ignore if ratio of elements from both sides is greater than 2
+                    bool isAllfromLeftSide = false;
+                    bool isAllfromRightSide = false;
+                    int LeftRatio = 0;
+                    int rightRatio = 0;
+                    if (combinations.Count() > 1)
+                    {
+                        int leftSideElementsCount = leftSide.Intersect(combinations).Count();
+                        int rightSideElementsCount = rightSide.Intersect(combinations).Count();
+                        LeftRatio = leftSideElementsCount - rightSideElementsCount;
+                        rightRatio = rightSideElementsCount - leftSideElementsCount;
+
+                        isAllfromLeftSide = leftSide.Intersect(combinations).Count() == combinations.Count(); //checks that all element from 1 side
+                        isAllfromRightSide = rightSide.Intersect(combinations).Count() == combinations.Count(); //checks that all element from 1 side
+                    }
+                    if ((isAllfromLeftSide == false && isAllfromRightSide == false) && (LeftRatio < 2 && rightRatio < 2))
+                    {
+                        #region EXTRA
+                        lstCombinations.Add(string.Join(",", combinations.ToArray()));
+                        dd = dd + string.Join(",", combinations.ToArray());
+                        dd = dd + ":";
+                        #endregion
+                        TotalCombinations = TotalCombinations + 1;
+                    }
+                    combinations.Clear();
                 }
+                
+                return TotalCombinations ;
             }
         }
     }
