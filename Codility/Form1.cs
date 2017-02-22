@@ -75,21 +75,28 @@ namespace Codility
 
         private void btnChromium_Click(object sender, EventArgs e)
         {
-            int[] arr1 = new int[] { 13, 2, 5 };
             Chromium.Solution obj = new Chromium.Solution();
+            Chromium2.Solution obj2 = new Chromium2.Solution();
+            int[] arr1 = new int[] { 13, 2, 5 };
             int result = obj.solution(arr1); // 7
+            int result01 = obj2.solution(arr1); // 7
+
 
             int[] arr2 = new int[] { 4, 6, 2, 1, 5 };
             int result1 = obj.solution(arr2); // 23
+            int result12 = obj2.solution(arr2); // 23
 
             int[] arr3 = new int[] {13,2,5,7 };
             int result2 = obj.solution(arr3); // 13
+            int result21 = obj2.solution(arr3); // 13
 
             int[] arr4 = new int[] { 3,4,65,8,2 };
             int result3 = obj.solution(arr4); // 15
+            int result31 = obj2.solution(arr4); // 15
 
             int[] arr5 = new int[] {5,4,8,9,1,6,2};
             int result4 = obj.solution(arr5); // 49
+            int result41 = obj2.solution(arr5); // 49
         }
     }
 }
