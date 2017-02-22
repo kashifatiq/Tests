@@ -71,43 +71,52 @@ namespace Problems
             public static long GetCombination(List<long> leftSide, List<long> rightSide)
             {
                 int TotalCombinations = 0;
-                List<long> Combined = new List<long>();
-                Combined.AddRange(leftSide);
-                Combined.AddRange(rightSide);
-                Combined.Sort();
-                List<long> combinations = new List<long>();
-                double count = Math.Pow(2, Combined.Count);
-                for (long i = 1; i <= count - 1; i++)
+                //List<long> Combined = new List<long>();
+                //Combined.AddRange(leftSide);
+                //Combined.AddRange(rightSide);
+                //Combined.Sort();
+                List<string> combinations = new List<string>();
+                //long CurrentNumber = 0;
+                string longestCombination = string.Empty;
+                for (int x = 0; x < leftSide.Count(); x++)
                 {
-                    string str = Convert.ToString(i, 2).PadLeft(Combined.Count, '0');
-                    for (int j = 0; j < str.Length; j++)
-                    {
-                        if (str[j] == '1')
-                        {
-                            combinations.Add(Combined[j]);
-                            if (combinations.Count() >= 2)
-                            {
-                                // if there are consecutive elements from any 1 list than ignore this combination
-                                if (leftSide.Contains(combinations[combinations.Count() -1]) == true && leftSide.Contains(combinations[combinations.Count() - 2]) == true)
-                                {
-                                    combinations.Clear();
-                                    break;
-                                }
-                                if (rightSide.Contains(combinations[combinations.Count() - 1]) == true && rightSide.Contains(combinations[combinations.Count() - 2]) == true)
-                                {
-                                    combinations.Clear();
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (combinations.Count() == 0)
-                        continue;
-                    TotalCombinations = TotalCombinations + 1;
-                    combinations.Clear();
+                    longestCombination = string.Empty;
+                    longestCombination = FindCombinations(leftSide, rightSide, combinations, x, longestCombination);
+                    if(!string.IsNullOrEmpty(longestCombination))
+                    combinations.Add(longestCombination);
+                }
+                for (int x = 0; x < rightSide.Count(); x++)
+                {
+                    longestCombination = string.Empty;
+                    longestCombination = FindCombinations(rightSide, leftSide, combinations, x, longestCombination);
+                    if (!string.IsNullOrEmpty(longestCombination))
+                        combinations.Add(FindCombinations(rightSide, leftSide, combinations, x, longestCombination));
                 }
 
+                TotalCombinations = TotalCombinations + 1;
+                combinations.Clear();
+
+
                 return TotalCombinations;
+            }
+
+            private static string FindCombinations(List<long> leftSide, List<long> rightSide, List<string> combinations, int x,string LongestCombination)
+            {
+
+                long nextGreaterNum = (from objresult in rightSide where (long)objresult > leftSide[x] select objresult).FirstOrDefault();
+                if (nextGreaterNum > 0)
+                {
+
+                    LongestCombination = LongestCombination + leftSide[x].ToString() + "," + nextGreaterNum.ToString();
+                    x = x + 1;
+                    if (leftSide.Count() > x)
+                        LongestCombination = FindCombinations(leftSide, rightSide, combinations, x, LongestCombination);
+                }
+                else if(!string.IsNullOrEmpty(LongestCombination))
+                {
+                    LongestCombination = LongestCombination + "," + leftSide[x].ToString();
+                }
+                return LongestCombination;
             }
         }
     }
