@@ -97,6 +97,11 @@ namespace Codility
             int[] arr5 = new int[] {5,4,8,9,1,6,2};
             int result4 = obj.solution(arr5); // 49
             int result41 = obj2.solution(arr5); // 49
+
+
+            int[] arr6 = new int[] { 5, 4,33434343,56,689,453345, 8, 9,97878,2342,23,5656879, 1, 6,76765,32211,45478,56786789,464335,55,6767,332,58790,345688004,454332,67676,6767674,6666,322222,5656, 2 };
+            //int result4 = obj.solution(arr5);
+            int result61 = obj2.solution(arr6);
         }
     }
 }
