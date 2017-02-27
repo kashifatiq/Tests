@@ -72,5 +72,36 @@ namespace Codility
             int x3 = obj.solution("123");   //1,2,12,3,13,23,123
             int x4 = obj.solution("02002"); //0,2,02,0,00,20,020,0,00,20,020,00,000,200,0200,2,02,22,022,02,002,202,0202,02,002,202,0202,002,0002,2002,02002
         }
+
+        private void btnChromium_Click(object sender, EventArgs e)
+        {
+            Chromium.Solution obj = new Chromium.Solution();
+            Chromium2.Solution obj2 = new Chromium2.Solution();
+            int[] arr1 = new int[] { 13, 2, 5 };
+            int result = obj.solution(arr1); // 7
+            int result01 = obj2.solution(arr1); // 7
+
+
+            int[] arr2 = new int[] { 4, 6, 2, 1, 5 };
+            int result1 = obj.solution(arr2); // 23
+            int result12 = obj2.solution(arr2); // 23
+
+            int[] arr3 = new int[] {13,2,5,7 };
+            int result2 = obj.solution(arr3); // 13
+            int result21 = obj2.solution(arr3); // 13
+
+            int[] arr4 = new int[] { 3,4,65,8,2 };
+            int result3 = obj.solution(arr4); // 15
+            int result31 = obj2.solution(arr4); // 15
+
+            int[] arr5 = new int[] {5,4,8,9,1,6,2};
+            int result4 = obj.solution(arr5); // 49
+            int result41 = obj2.solution(arr5); // 49
+
+
+            int[] arr6 = new int[] { 5, 4,33434343,56,689,453345, 8, 9,97878,2342,23,5656879, 1, 6,76765,32211,45478,56786789,464335,55,6767,332,58790,345688004,454332,67676,6767674,6666,322222,5656, 2 };
+            //int result4 = obj.solution(arr5);
+            int result61 = obj2.solution(arr6);
+        }
     }
 }
